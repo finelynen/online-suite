@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="flex gap-8">
           <a href="https://instagram.com/finelynen" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Instagram</a>
           <a href="https://spotify.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Spotify</a>
-          <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">GitHub</a>
+          <a href="https://github.com/finelynen" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">GitHub</a>
           <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
         </div>
       </div>
