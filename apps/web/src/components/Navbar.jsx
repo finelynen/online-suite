@@ -18,7 +18,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900">
       <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link to="/" className="text-lg font-bold tracking-[0.2em] uppercase hover:text-neutral-400 transition-colors">
-          YOUR NAME
+          Fine Lynen
         </Link>
 
         {/* Desktop Links */}
