@@ -19,7 +19,8 @@ export default function Navbar() {
   const activeColor = ({ isActive }) => ({
     color: isActive ? 'var(--accent)' : 'var(--text-h)',
     display: 'inline-block',
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
+    letterSpacing: '0.15em'
   });
 
   return (
@@ -28,13 +29,24 @@ export default function Navbar() {
       style={{ 
         background: 'var(--bg)',
         borderColor: 'var(--border)',
-        height: '80px'
+        height: '80px',
+        width: '100vw' /* Forces the backdrop to stretch completely wide */
       }}
     >
+      {/* 
+        CRITICAL ROW LOCK: 
+        W-full, mx-auto, and flex justify-between splits the Logo (Left) and Links (Right) 
+        while maxWidth centers the entire inner box layout to match your page grids.
+      */}
       <div 
-        className="w-full h-full mx-auto px-6 flex items-center justify-between" 
-        style={{ maxWidth: '1126px', textAlign: 'left' }}
+        className="w-full h-full mx-auto px-6 flex flex-row items-center justify-between" 
+        style={{ 
+          maxWidth: '1126px', 
+          textAlign: 'left',
+          boxSizing: 'border-box'
+        }}
       >
+        {/* Brand Logo - Anchored Left */}
         <Link 
           to="/" 
           style={{ color: 'var(--text-h)', letterSpacing: '0.2em' }}
@@ -43,7 +55,7 @@ export default function Navbar() {
           Fine Lynen
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Navigation Links - Pushed and Spaced Flush Right */}
         <div className="hidden md:flex flex-row items-center gap-12 text-xs font-medium uppercase ml-auto">
           {navItems.map((item) => (
             <NavLink 
@@ -77,14 +89,14 @@ export default function Navbar() {
       {isOpen && (
         <div 
           style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--border)' }}
-          className="md:hidden border-b px-6 py-6 flex flex-col gap-4 text-xs font-medium tracking-widest uppercase text-left"
+          className="md:hidden border-b px-6 py-6 flex flex-col gap-4 text-xs font-medium tracking-widest uppercase text-left w-full"
         >
           {navItems.map((item) => (
             <Link 
               key={item.path} 
               to={item.path} 
               onClick={() => setIsOpen(false)} 
-              style={{ color: 'var(--text-h)' }}
+              style={{ color: 'var(--text-h)', letterSpacing: '0.15em' }}
               className="opacity-70 hover:opacity-100 py-2"
             >
               {item.name}
