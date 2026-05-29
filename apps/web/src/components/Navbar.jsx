@@ -11,11 +11,10 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" },
   ];
 
-  // Uses theme variables to smoothly handle light and dark modes
   const activeStyle = ({ isActive }) =>
     isActive 
-      ? "font-semibold transition-colors duration-200" 
-      : "opacity-60 hover:opacity-100 transition-colors duration-200";
+      ? "font-semibold transition-all duration-200" 
+      : "opacity-60 hover:opacity-100 transition-all duration-200";
 
   const activeColor = ({ isActive }) => ({
     color: isActive ? 'var(--accent)' : 'var(--text-h)'
@@ -23,26 +22,33 @@ export default function Navbar() {
 
   return (
     <nav 
-      // Spans exactly 100% of the display viewport width seamlessly
       className="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-md transition-colors duration-300"
       style={{ 
-        backgroundColor: 'rgba(var(--bg), 0.8)', /* Handled via variable fallback */
         background: 'var(--bg)',
         borderColor: 'var(--border)' 
       }}
     >
-      {/* Container matched to sit inside your strict 1126px layout boundaries */}
-      <div className="w-full mx-auto px-6 h-20 flex items-center justify-between" style={{ maxWidth: '1126px' }}>
+      {/* 
+        CRITICAL FIX: Added !text-left and explicit flex behaviors here.
+        This forces the container to break out of the #root text-align inheritance.
+      */}
+      <div 
+        className="w-full mx-auto px-6 h-20 flex items-center justify-between !text-left" 
+        style={{ maxWidth: '1126px' }}
+      >
         <Link 
           to="/" 
           style={{ color: 'var(--text-h)' }}
-          className="text-lg font-bold tracking-[0.2em] uppercase transition-colors"
+          className="text-lg font-bold tracking-[0.2em] uppercase transition-colors shrink-0"
         >
           Fine Lynen
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8 text-xs font-medium tracking-widest uppercase">
+        {/* 
+          Desktop Links Container
+          The gap-8 with explicit flex-row ensures items spread horizontally out.
+        */}
+        <div className="hidden md:flex flex-row items-center gap-8 text-xs font-medium tracking-widest uppercase ml-auto">
           {navItems.map((item) => (
             <NavLink 
               key={item.path} 
@@ -59,7 +65,7 @@ export default function Navbar() {
         <button 
           onClick={() => setIsOpen(!isOpen)} 
           style={{ color: 'var(--text-h)' }}
-          className="md:hidden opacity-70 hover:opacity-100 focus:outline-none cursor-pointer"
+          className="md:hidden opacity-70 hover:opacity-100 focus:outline-none cursor-pointer ml-auto"
         >
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             {isOpen ? (
@@ -93,4 +99,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
