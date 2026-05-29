@@ -6,7 +6,7 @@ export default function Home() {
       {/* Intro Hero Area */}
       <div className="max-w-4xl mb-20">
         <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-none bg-gradient-to-b from-white via-neutral-200 to-neutral-600 bg-clip-text text-transparent">
-          SONIC ARCHITECT & ARTIST.
+          ARTIST * PRODUCER * ENGINEER * MODEL * ACTOR.
         </h1>
         <p className="text-md sm:text-xl text-neutral-400 leading-relaxed max-w-2xl font-light">
           Operating seamlessly across audio engineering, record production, dramatic performance, and high-fashion modeling.
