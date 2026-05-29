@@ -1,25 +1,21 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Music from "./pages/Music";
-import Portfolio from "./pages/Portfolio";
-import Contact from "./pages/Contact";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-
-// Auto-scrolls to top on page navigation
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar'; // Adjust these paths if needed
+
+// Layout & Components
+import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
+// Pages
 import Home from './pages/Home';
 import About from './pages/About';
 import Music from './pages/Music';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 
+// Global styles containing your 1126px grid & themes
+import './App.css';
+
+// Auto-scrolls to top on page navigation
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -29,7 +25,7 @@ function ScrollToTop() {
 }
 
 function App() {
-  // 1. Initialize the global form state
+  // Initialize the form state across page transitions
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -40,16 +36,18 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="bg-neutral-950 text-neutral-100 min-h-screen selection:bg-white selection:text-black font-sans antialiased">
+      {/* 
+        Removed the restrictive Tailwind utilities here. 
+        The layout is now driven correctly by #root and body rules in App.css 
+      */}
+      <div>
         <Navbar />
-        <main className="pt-20 min-h-[calc(100vh-160px)]">
+        <main className="pt-20">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/music" element={<Music />} />
             <Route path="/portfolio" element={<Portfolio />} />
-            
-            {/* 2. Pass state and setter functions as props here */}
             <Route 
               path="/contact" 
               element={<Contact formData={formData} setFormData={setFormData} />} 
@@ -63,4 +61,3 @@ function App() {
 }
 
 export default App;
-
