@@ -12,7 +12,7 @@ import Music from './pages/Music';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 
-// FIXED: Swapped ./App.css to ./index.css to ingest the broken font fixes!
+// Global styles containing your 1126px grid & themes
 import './index.css';
 
 // Auto-scrolls to top on page navigation
@@ -36,9 +36,19 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div>
+      
+      {/* 
+        FIX 1: Force the primary wrapper div to span at least 100% 
+        of the viewport screen height using a flex column layout.
+      */}
+      <div className="min-h-screen flex flex-col justify-between">
         <Navbar />
-        <main className="pt-20">
+        
+        {/* 
+          FIX 2: Adding 'flex-grow' instructs this main block to act like 
+          a rubber band, filling all vertical blank spaces seamlessly.
+        */}
+        <main className="pt-20 flex-grow flex flex-col justify-center w-full">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -50,6 +60,7 @@ function App() {
             />
           </Routes>
         </main>
+        
         <Footer />
       </div>
     </Router>
