@@ -12,8 +12,8 @@ import Music from './pages/Music';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 
-// Global styles containing your 1126px grid & themes
-import './App.css';
+// FIXED: Swapped ./App.css to ./index.css to ingest the broken font fixes!
+import './index.css';
 
 // Auto-scrolls to top on page navigation
 function ScrollToTop() {
@@ -36,10 +36,6 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      {/* 
-        Removed the restrictive Tailwind utilities here. 
-        The layout is now driven correctly by #root and body rules in App.css 
-      */}
       <div>
         <Navbar />
         <main className="pt-20">
