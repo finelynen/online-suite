@@ -16,8 +16,12 @@ export default function Navbar() {
       ? "font-semibold transition-all duration-200" 
       : "opacity-60 hover:opacity-100 transition-all duration-200";
 
+  // 1. ADDED EXPLICIT INLINE BOX AND TRACKING PROPERTIES HERE
   const activeColor = ({ isActive }) => ({
-    color: isActive ? 'var(--accent)' : 'var(--text-h)'
+    color: isActive ? 'var(--accent)' : 'var(--text-h)',
+    display: 'inline-block', // Guarantees character bounds scale layout correctly
+    whiteSpace: 'nowrap',    // Stops individual words from breaking text paths
+    letterSpacing: '0.15em'  // Spreads individual letters cleanly apart
   });
 
   return (
@@ -25,30 +29,27 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-md transition-colors duration-300"
       style={{ 
         background: 'var(--bg)',
-        borderColor: 'var(--border)' 
+        borderColor: 'var(--border)',
+        height: '80px' // Hardcoded height keeps structural layout tracking stable
       }}
     >
-      {/* 
-        CRITICAL FIX: Added !text-left and explicit flex behaviors here.
-        This forces the container to break out of the #root text-align inheritance.
-      */}
       <div 
-        className="w-full mx-auto px-6 h-20 flex items-center justify-between !text-left" 
+        className="w-full h-full mx-auto px-6 flex items-center justify-between !text-left" 
         style={{ maxWidth: '1126px' }}
       >
         <Link 
           to="/" 
-          style={{ color: 'var(--text-h)' }}
-          className="text-lg font-bold tracking-[0.2em] uppercase transition-colors shrink-0"
+          style={{ color: 'var(--text-h)', letterSpacing: '0.2em' }}
+          className="text-lg font-bold uppercase transition-colors shrink-0"
         >
           Fine Lynen
         </Link>
 
         {/* 
-          Desktop Links Container
-          The gap-8 with explicit flex-row ensures items spread horizontally out.
+          2. INCREASED INTER-LINK GAP DISTANCE
+          Swapped gap-8 for gap-12 to push standalone word links widely apart
         */}
-        <div className="hidden md:flex flex-row items-center gap-8 text-xs font-medium tracking-widest uppercase ml-auto">
+        <div className="hidden md:flex flex-row items-center gap-12 text-xs font-medium uppercase ml-auto">
           {navItems.map((item) => (
             <NavLink 
               key={item.path} 
@@ -81,14 +82,14 @@ export default function Navbar() {
       {isOpen && (
         <div 
           style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--border)' }}
-          className="md:hidden border-b px-6 py-6 flex flex-col gap-4 text-xs font-medium tracking-widest uppercase text-left transition-all"
+          className="md:hidden border-b px-6 py-6 flex flex-col gap-4 text-xs font-medium uppercase text-left transition-all"
         >
           {navItems.map((item) => (
             <Link 
               key={item.path} 
               to={item.path} 
               onClick={() => setIsOpen(false)} 
-              style={{ color: 'var(--text-h)' }}
+              style={{ color: 'var(--text-h)', letterSpacing: '0.15em' }}
               className="opacity-70 hover:opacity-100 py-2 border-b border-transparent transition-opacity"
             >
               {item.name}
