@@ -228,12 +228,8 @@ function App() {
           {/* Page Routing Controller */}
           <Routes>
             <Route path="/" element={<Storefront />} />
-            <Route path="/About" element={<Music />} />
-            <Route path="/Contact" element={<Music />} />
-            <Route path="/Auth" element={<Auth />} />
-            <Route path="/Music" element={<Music />} />
-            <Route path="/Portfolio" element={<Music />} />
-
+            <Route path="/login" element={<Auth />} />
+            <Route path="/shop" element={<Shop />} />
           </Routes>
 
           <footer className="site-info" id="about" style={{ background: '#111', color: '#fbfaf8', padding: '3rem 2rem', marginTop: '4rem' }}>
