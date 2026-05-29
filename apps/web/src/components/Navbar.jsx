@@ -11,38 +11,80 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" },
   ];
 
+  // Uses theme variables to smoothly handle light and dark modes
   const activeStyle = ({ isActive }) =>
-    isActive ? "text-white font-semibold" : "text-neutral-400 hover:text-white transition-colors duration-200";
+    isActive 
+      ? "font-semibold transition-colors duration-200" 
+      : "opacity-60 hover:opacity-100 transition-colors duration-200";
+
+  const activeColor = ({ isActive }) => ({
+    color: isActive ? 'var(--accent)' : 'var(--text-h)'
+  });
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900">
-      <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link to="/" className="text-lg font-bold tracking-[0.2em] uppercase hover:text-neutral-400 transition-colors">
+    <nav 
+      // Spans exactly 100% of the display viewport width seamlessly
+      className="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-md transition-colors duration-300"
+      style={{ 
+        backgroundColor: 'rgba(var(--bg), 0.8)', /* Handled via variable fallback */
+        background: 'var(--bg)',
+        borderColor: 'var(--border)' 
+      }}
+    >
+      {/* Container matched to sit inside your strict 1126px layout boundaries */}
+      <div className="w-full mx-auto px-6 h-20 flex items-center justify-between" style={{ maxWidth: '1126px' }}>
+        <Link 
+          to="/" 
+          style={{ color: 'var(--text-h)' }}
+          className="text-lg font-bold tracking-[0.2em] uppercase transition-colors"
+        >
           Fine Lynen
         </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8 text-xs font-medium tracking-widest uppercase">
           {navItems.map((item) => (
-            <NavLink key={item.path} to={item.path} className={activeStyle}>
+            <NavLink 
+              key={item.path} 
+              to={item.path} 
+              className={activeStyle}
+              style={activeColor}
+            >
               {item.name}
             </NavLink>
           ))}
         </div>
 
         {/* Mobile Hamburger Trigger */}
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-neutral-400 hover:text-white focus:outline-none">
+        <button 
+          onClick={() => setIsOpen(!isOpen)} 
+          style={{ color: 'var(--text-h)' }}
+          className="md:hidden opacity-70 hover:opacity-100 focus:outline-none cursor-pointer"
+        >
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            {isOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
+            {isOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
           </svg>
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown Panel */}
       {isOpen && (
-        <div className="md:hidden bg-neutral-950 border-b border-neutral-900 px-6 py-4 flex flex-col gap-4 text-xs font-medium tracking-widest uppercase">
+        <div 
+          style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--border)' }}
+          className="md:hidden border-b px-6 py-6 flex flex-col gap-4 text-xs font-medium tracking-widest uppercase text-left transition-all"
+        >
           {navItems.map((item) => (
-            <Link key={item.path} to={item.path} onClick={() => setIsOpen(false)} className="text-neutral-400 hover:text-white py-2">
+            <Link 
+              key={item.path} 
+              to={item.path} 
+              onClick={() => setIsOpen(false)} 
+              style={{ color: 'var(--text-h)' }}
+              className="opacity-70 hover:opacity-100 py-2 border-b border-transparent transition-opacity"
+            >
               {item.name}
             </Link>
           ))}
@@ -51,3 +93,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
