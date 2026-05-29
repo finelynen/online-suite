@@ -1,0 +1,379 @@
+/* ==========================================================================
+   1. Base Resets & Global Typography (Full Viewport Fixes)
+   ========================================================================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Enforce the full browser canvas boundaries */
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+  
+  body {
+    /* Stretches background graphic across the absolute bounds of the monitor */
+    background: url('/images/Hero.jpg') center/cover no-repeat fixed;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    background-color: #faf9f6; 
+    color: #1a1a1a;
+    line-height: 1.6;
+    
+    /* Flex layout forces the footer to cling to the bottom boundary */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Enforces the React root mount wrapper to expand with the body */
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Demands the app fill at least 100% of screen height */
+    width: 100%;
+  }
+  
+  h1, h2, h3, .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  /* ==========================================================================
+     2. Premium Sticky Header & Navigation Layout
+     ========================================================================== */
+  .main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px; /* Widened for spacious desktop layout viewports */
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    width: 100%;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .site-logo {
+    height: 65px; 
+    width: auto;  
+    display: block;
+    object-fit: contain;
+  }
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #000;
+  }
+  
+  .auth-cta {
+    background-color: #1a1a1a;
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-size: 13px !important;
+    transition: background-color 0.3s ease !important;
+  }
+  
+  /* ==========================================================================
+     3. Hero Visual & Call to Action Section (Full Web Scale)
+     ========================================================================== */
+  main {
+    flex-grow: 1; /* Automatically stretches to consume any empty screen space */
+    width: 100%;
+  }
+  
+  .hero {
+    height: 65vh; /* Dedicated web dashboard display depth */
+    background-color: rgba(242, 239, 233, 0.85); /* Slightly transparent tint */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    width: 100%;
+  }
+  
+  .hero-content h1 {
+    font-size: 3.5rem; /* Enlarged for desktop web presence */
+    margin-bottom: 20px;
+    color: #1a1a1a;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    color: #444;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  
+  .btn-primary {
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #444444;
+  }
+  
+  /* ==========================================================================
+   4. Responsive Product Categories Grid & Shared Boutique Buttons
+   ========================================================================== */
+.shop-container {
+  padding: 60px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.category-group {
+  margin-bottom: 50px;
+}
+
+.category-group h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+  color: #333;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card-img {
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f7f7f7;
+  width: 100%;
+}
+
+.card-info {
+  padding: 20px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+/* Master Primary Button Definition */
+.btn-primary {
+  display: inline-block;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: 1px solid #1a1a1a; /* Enforces clean crisp boundary definition */
+  padding: 12px 30px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: #1a1a1a;
+}
+
+/* Fixed Secondary Button Definition: Now targets native button tags safely */
+.btn-secondary {
+  display: inline-block;
+  background-color: transparent;
+  color: #1a1a1a;
+  border: 1px solid #1a1a1a; /* Fixed missing button border framework mask */
+  padding: 12px 30px; /* Aligned padding values to match primary perfectly */
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  outline: none;
+}
+
+.btn-secondary:hover {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+  
+  /* ==========================================================================
+     5. Side-by-Side Auth Page Interface Layout
+     ========================================================================== */
+  .auth-page-container {
+    display: flex;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    gap: 40px;
+  }
+  
+  .auth-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-column h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: #1a1a1a;
+  }
+  
+  .auth-subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 25px;
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .auth-form input {
+    font-family: 'Montserrat', sans-serif;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fcfcfc;
+    transition: border-color 0.3s ease;
+  }
+  
+  .auth-form input:focus {
+    outline: none;
+    border-color: #1a1a1a;
+  }
+  
+  /* Visual vertical separator line between forms */
+  .auth-divider {
+    width: 1px;
+    background-color: #eee;
+    align-self: stretch;
+  }
+  
+  /* ==========================================================================
+     6. Minimalist Footer Layout & Breakpoints
+     ========================================================================== */
+  .site-info {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 40px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  
+  .info-block h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  
+  .info-block a {
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.8;
+  }
+  
+  .info-block a:hover {
+    opacity: 1;
+  }
+  
+  .legal-footer {
+    margin-top: 30px;
+    font-size: 12px;
+    opacity: 0.5;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+  }
+  
+  /* Responsive constraints for screens smaller than tablet view */
+  @media (max-width: 768px) {
+    .auth-page-container {
+      flex-direction: column;
+      margin: 20px;
+      padding: 20px;
+    }
+    .auth-divider {
+      height: 1px;
+      width: 100%;
+      margin: 20px 0;
+    }
+  }
+  
