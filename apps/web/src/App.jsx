@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-// Layout & Components
+// Structural Elements
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-// Pages
+// Page Views
 import Home from './pages/Home';
 import About from './pages/About';
 import Music from './pages/Music';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 
-// Global styles containing your 1126px grid & themes
+// ONLY import index.css here to prevent rule pollution
 import './index.css';
 
-// Auto-scrolls to top on page navigation
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -25,7 +24,6 @@ function ScrollToTop() {
 }
 
 function App() {
-  // Initialize the form state across page transitions
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,30 +36,46 @@ function App() {
       <ScrollToTop />
       
       {/* 
-        FIX 1: Force the primary wrapper div to span at least 100% 
-        of the viewport screen height using a flex column layout.
+        The global base viewport container. 
+        Spans 100% width and height of the display monitor window natively.
       */}
-      <div className="min-h-screen flex flex-col justify-between">
+      <div 
+        className="min-h-screen flex flex-col justify-between w-full"
+        style={{ backgroundColor: 'var(--bg)' }}
+      >
+        {/* Sits at the absolute viewport top without squishing */}
         <Navbar />
         
         {/* 
-          FIX 2: Adding 'flex-grow' instructs this main block to act like 
-          a rubber band, filling all vertical blank spaces seamlessly.
+          This structural inner grid wrapper perfectly aligns content 
+          to your 1126px mockup grid boundaries and isolates side borders.
         */}
-        <main className="pt-20 flex-grow flex flex-col justify-center w-full">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/music" element={<Music />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route 
-              path="/contact" 
-              element={<Contact formData={formData} setFormData={setFormData} />} 
-            />
-          </Routes>
-        </main>
+        <div 
+          className="flex-grow w-full mx-auto border-x flex flex-col justify-center items-center px-4 md:px-8 pt-28 pb-12"
+          style={{ 
+            maxWidth: '1126px', 
+            borderColor: 'var(--border)',
+            boxSizing: 'border-box'
+          }}
+        >
+          <main className="w-full flex flex-col items-center justify-center flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/music" element={<Music />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route 
+                path="/contact" 
+                element={<Contact formData={formData} setFormData={setFormData} />} 
+              />
+            </Routes>
+          </main>
+        </div>
         
-        <Footer />
+        {/* Bottom wrapper layout matches the main page grid width constraints */}
+        <div className="w-full mx-auto border-x" style={{ maxWidth: '1126px', borderColor: 'var(--border)' }}>
+          <Footer />
+        </div>
       </div>
     </Router>
   );
