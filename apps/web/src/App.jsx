@@ -1,252 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
-import './App.css'; 
-import Auth from './pages/Auth'; 
-import Shop from './pages/Shop';
-import { CartProvider, useCart } from './context/CartContext';
+import React from 'react';
 
-// Clean sub-component for the main store contents
-function Storefront() {
-  const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function App() {
+  const disciplines = [
+    { title: 'Artist', desc: 'Creative direction, visual styling, and artistic execution.' },
+    { title: 'Producer', desc: 'Sonic architecture, record production, and music composition.' },
+    { title: 'Engineer', desc: 'Industry-standard vocal tracking, mixing, and audio mastering.' },
+    { title: 'Model', desc: 'High-fashion runway layouts, commercial print, and editorial lookbooks.' },
+    { title: 'Actor', desc: 'Theatrical cinema performances, screen productions, and commercial works.' },
+  ];
 
-  // Production Pattern: Fetch live uploaded products on load
-  useEffect(() => {
-    fetch('<http://localhost:5000/api/products/>')
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error fetching inventory:', err);
-        setLoading(false);
-      });
-  }, []);
-
-  // Group products by their uploaded categories dynamically
-  const categories = products.reduce((acc, item) => {
-    const category = item.category || "Uncategorized";
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(item);
-    return acc;
-  }, {});
+  const contactSection = (e) => {
+    e.preventDefault();
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <main>
-      {/* Hero Banner Section */}
-      <section className="hero" id="home">
-        <div className="hero-content">
-          <h1>Handcrafted Elegance</h1>
-          <p>Unique, artisanal crafts delivered from our home to yours.</p>
+    <div className="fine-lynen-portfolio" style={{ background: '#050505', color: '#ffffff', minHeight: '100vh', fontFamily: 'sans-serif', margin: 0 }}>
+      
+      {/* 1. Header Navigation Layout */}
+      <header role="banner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 2rem', background: '#000000', borderBottom: '1px solid #111111' }}>
+        <div style={{ fontSize: '1.3rem', fontWeight: '900', letterSpacing: '1px' }}>
+          FINE LYNEN
+        </div>
+        <nav>
+          <a href="#contact" onClick={contactSection} style={{ background: '#c5a880', color: '#000000', padding: '10px 20px', borderRadius: '4px', fontWeight: '600', textDecoration: 'none', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            Inquire / Booking
+          </a>
+        </nav>
+      </header>
+
+      {/* 2. Professional Profile Hero Section */}
+      <section style={{ padding: '120px 20px', textAlign: 'center', maxWidth: '850px', margin: '0 auto' }}>
+        <span style={{ fontSize: '11px', color: '#c5a880', letterSpacing: '4px', textTransform: 'uppercase', fontWeight: '600', display: 'block', marginBottom: '15px' }}>
+          Artist • Producer • Engineer • Model • Actor
+        </span>
+        <h1 style={{ fontSize: '4.5rem', fontWeight: '900', margin: '0 0 25px 0', letterSpacing: '-2px', textTransform: 'uppercase' }}>
+          Fine Lynen
+        </h1>
+        <p style={{ color: '#888888', fontSize: '1.3rem', fontWeight: '300', marginBottom: '40px', lineHeight: '1.7', letterSpacing: '0.5px' }}>
+          Creative force across music, fashion, and film. Offering premier creative collaboration, audio production assets, editorial modeling talent, and screen performance execution.
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <a href="#contact" onClick={contactSection} style={{ border: '1px solid #c5a880', color: '#c5a880', padding: '14px 35px', textDecoration: 'none', fontWeight: '500', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '1px', borderRadius: '4px' }}>
+            View representation details
+          </a>
         </div>
       </section>
-      
-      {/* Clickable React Router link styled as a boutique button */}
-      <div className="shop-all-container" style={{ display: 'flex', justifyContent: 'center', margin: '40px 0' }}>
-        <Link to="/shop" className="btn-primary" style={{ textDecoration: 'none' }}>
-          Shop All Products
-        </Link>
-      </div>
 
-      {/* Dynamic Storefront Categories Container */}
-      <section id="shop" className="container shop-container">
-        <h2 className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>Shop by Category</h2>
-
-        {loading ? (
-          <div style={{ textAlign: 'center', padding: '40px' }}><h3>Loading Boutique Catalog...</h3></div>
-        ) : Object.keys(categories).length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '40px', color: '#777' }}><p>No products uploaded yet.</p></div>
-        ) : (
-          Object.keys(categories).map((categoryName) => (
-            <div key={categoryName} className="category-group" style={{ marginBottom: '3rem' }}>
-              <h3 style={{ marginBottom: '1.5rem', borderBottom: '1px solid #e0e0e0', paddingBottom: '0.5rem' }}>
-                {categoryName}
-              </h3>
-              
-              <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-                {categories[categoryName].map((item) => (
-                  <div 
-                    key={item.id || item._id} 
-                    className="product-card" 
-                    style={{ 
-                      display: 'flex', 
-                      flexDirection: 'column',
-                      position: 'relative',
-                      opacity: item.isAvailable ? 1 : 0.6 
-                    }}
-                  >
-                    {!item.isAvailable && (
-                      <span style={{
-                        position: 'absolute', top: '15px', right: '15px',
-                        background: '#d9534f', color: '#fff', fontSize: '11px',
-                        fontWeight: 'bold', padding: '4px 10px', textTransform: 'uppercase',
-                        borderRadius: '2px', zIndex: 5
-                      }}>
-                        Sold Out
-                      </span>
-                    )}
-
-                    <div 
-                      className="card-img" 
-                      style={{ 
-                        backgroundImage: `url('${item.image}')`,
-                        height: '300px',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundColor: '#eaeaea' 
-                      }}
-                    ></div>
-                    <div className="card-info" style={{ padding: '1rem 0', textAlign: 'center' }}>
-                      <h4 style={{ margin: '0 0 0.5rem 0' }}>{item.title}</h4>
-                      <p style={{ fontWeight: '500', marginBottom: '10px', fontSize: '0.9rem' }}>${Number(item.price).toFixed(2)}</p>
-                      
-                      <button className="btn-secondary" onClick={() => navigate('/shop')}>
-                        {item.isAvailable ? `View ${item.title}` : 'Out of Stock'}
-                      </button>
-                    </div>
-                  </div>
-                ))}
+      {/* 3. Core Ecosystem Columns */}
+      <section style={{ background: '#000000', padding: '80px 20px', borderTop: '1px solid #111111', borderBottom: '1px solid #111111' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '0.85rem', color: '#555555', textTransform: 'uppercase', letterSpacing: '3px', marginBottom: '40px', textAlign: 'center' }}>Professional Ecosystem</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+            {disciplines.map((item, idx) => (
+              <div key={idx} style={{ border: '1px solid #111111', padding: '30px', background: '#050505', borderRadius: '6px' }}>
+                <h3 style={{ color: '#c5a880', margin: '0 0 12px 0', fontSize: '1.25rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  {item.title}
+                </h3>
+                <p style={{ color: '#777777', fontSize: '0.95rem', margin: 0, lineHeight: '1.6' }}>
+                  {item.desc}
+                </p>
               </div>
-            </div>
-          ))
-        )}
+            ))}
+          </div>
+        </div>
       </section>
-    </main>
+
+      {/* 4. Action Contact / Profile Footer */}
+      <footer id="contact" style={{ background: '#050505', padding: '80px 20px', textAlign: 'center' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <h4 style={{ color: '#c5a880', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.9rem' }}>
+            Direct Business Booking
+          </h4>
+          <p style={{ margin: '0 0 40px 0' }}>
+            <a href="mailto:finelynen@gmail.com" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '1.4rem', fontWeight: '500', borderBottom: '1px solid #333333', paddingBottom: '4px' }}>
+              finelynen@gmail.com
+            </a>
+          </p>
+          <div style={{ borderTop: '1px solid #111111', paddingTop: '30px', fontSize: '0.8rem', color: '#444444', letterSpacing: '1px' }}>
+            &copy; {new Date().getFullYear()} FINE LYNEN. All rights reserved.
+          </div>
+        </div>
+      </footer>
+
+    </div>
   );
 }
-
-// Custom Navigation Link Component to handle cross-page anchor scrolling safely
-function NavAnchorLink({ toElementId, children }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleScroll = (e) => {
-    e.preventDefault();
-    if (location.pathname !== '/') {
-      navigate('/', { state: { scrollToId: toElementId } });
-    } else {
-      document.getElementById(toElementId)?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return <a href={`#${toElementId}`} onClick={handleScroll}>{children}</a>;
-}
-
-// Core Navigation Wrapper to listen for incoming redirect scroll events
-function ScrollToViewManager({ children }) {
-  const location = useLocation();
-  
-  React.useEffect(() => {
-    if (location.pathname === '/' && location.state?.scrollToId) {
-      const elementId = location.state.scrollToId;
-      setTimeout(() => {
-        document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-      window.history.replaceState({}, document.title);
-    }
-  }, [location]);
-
-  return children;
-}
-
-// Sub-navigation layout block: Now dynamically updates based on client login state
-function NavigationHeader() {
-  const { cartItemCount } = useCart(); 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  // ✅ Read user token to check auth status live
-  const isAuthenticated = !!localStorage.getItem('bmp_token');
-
-  const handleLogout = () => {
-    localStorage.removeItem('bmp_token'); // Clear token
-    alert('Logged out successfully.');
-    navigate('/'); // Route home safely
-  };
-
-  return (
-    <header role="banner" className="main-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', borderBottom: '1px solid #eee' }}>
-      <div className="logo-container">
-        <Link to="/">
-          <img src="/images/bmp_logo.png" alt="Black Magic Puffs" className="site-logo" style={{ maxHeight: '60px' }} />
-        </Link>
-      </div>
-      
-      <nav className="navbar">
-        <ul className="nav-links" style={{ display: 'flex', listStyle: 'none', gap: '2rem', alignItems: 'center' }}>
-          <li><Link to="/">Home</Link></li>
-          <li><NavAnchorLink toElementId="shop">Shop</NavAnchorLink></li>
-          <li><NavAnchorLink toElementId="about">About</NavAnchorLink></li>
-          <li>
-            <Link to="/shop" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-              Cart
-              {cartItemCount > 0 && (
-                <span style={{
-                  position: 'absolute', top: '-10px', right: '-15px',
-                  background: '#c5a880', color: '#fff', fontSize: '10px',
-                  fontWeight: 'bold', borderRadius: '50%', padding: '2px 6px',
-                  display: 'inline-block', minWidth: '18px', textAlign: 'center'
-                }}>
-                  {cartItemCount}
-                </span>
-              )}
-            </Link>
-          </li>
-          
-          {/* ✅ Dynamic Login/Logout toggle check */}
-          {isAuthenticated ? (
-            <li>
-              <button 
-                onClick={handleLogout} 
-                className="auth-cta" 
-                style={{ border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
-              >
-                Log Out
-              </button>
-            </li>
-          ) : (
-            <li><Link to="/login" className="auth-cta">Signup / Login</Link></li>
-          )}
-        </ul>
-      </nav>
-    </header>
-  );
-}
-
-function App() {
-  return (
-    <CartProvider>
-      <Router>
-        <ScrollToViewManager>
-          
-          <NavigationHeader />
-
-          {/* Page Routing Controller */}
-          <Routes>
-            <Route path="/" element={<Storefront />} />
-            <Route path="/login" element={<Auth />} />
-            <Route path="/shop" element={<Shop />} />
-          </Routes>
-
-          <footer className="site-info" id="about" style={{ background: '#111', color: '#fbfaf8', padding: '3rem 2rem', marginTop: '4rem' }}>
-            <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-              <div className="info-block" style={{ textAlign: 'center' }}>
-                <h4 style={{ color: '#c5a880', marginBottom: '0.5rem' }}>Contact Us</h4>
-                <p><a href="mailto:Blackmagicpuffs@gmail.com" style={{ color: '#fff' }}>Blackmagicpuffs@gmail.com</a></p>
-              </div>
-              <div className="legal-footer" style={{ borderTop: '1px solid #333', width: '100%', textAlign: 'center', paddingTop: '1.5rem', fontSize: '0.85rem', color: '#666' }}>
-                <p>&copy; {new Date().getFullYear()} Black Magic Puffs. All rights reserved.</p>
-              </div>
-            </div>
-          </footer>
-        </ScrollToViewManager>
-      </Router>
-    </CartProvider>
-  );
-}
-
-export default App;
