@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function App() {
   const disciplines = [
-    { title: 'Artist', desc: 'Creative direction, visual styling, and artistic execution.' },
+    { title: 'Artist', desc: 'Recording artist specializing in vocal performance, songwriting, and musical creation. Delivering original records, dynamic vocal execution, and full song development.' },
     { title: 'Producer', desc: 'Sonic architecture, record production, and music composition.' },
     { title: 'Engineer', desc: 'Industry-standard vocal tracking, mixing, and audio mastering.' },
     { title: 'Model', desc: 'High-fashion runway layouts, commercial print, and editorial lookbooks.' },
