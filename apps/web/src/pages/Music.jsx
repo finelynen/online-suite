@@ -53,3 +53,4 @@ export default function Music() {
   );
 }
 
+export default Music;
