@@ -120,3 +120,4 @@ export default function Contact({ formData, setFormData }) {
     </div>
   );
 }
+export default Contact;
