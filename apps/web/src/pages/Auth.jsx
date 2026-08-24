@@ -123,3 +123,4 @@ export default function Auth() {
     </div>
   );
 }
+export default Auth;
