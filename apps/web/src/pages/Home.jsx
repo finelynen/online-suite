@@ -54,17 +54,17 @@ export default function Home() {
           background: "#000000",
           borderBottom: "1px solid #111111",
         }}
-        >
+      >
         <div
           style={{
             fontSize: "1.3rem",
             fontWeight: "900",
             letterSpacing: "1px",
           }}
-          >
+        >
           FINE LYNEN
         </div>
-        
+
         <nav style={{ display: "flex", gap: "15px", alignItems: "center" }}>
           <a
             href="#contact"
@@ -80,10 +80,10 @@ export default function Home() {
               textTransform: "uppercase",
               letterSpacing: "0.5px",
             }}
-            >
+          >
             Inquire / Booking
           </a>
-          
+
           <a
             href="/auth"
             style={{
@@ -97,12 +97,11 @@ export default function Home() {
               letterSpacing: "0.5px",
               border: "1px solid #c5a880",
             }}
-            >
+          >
             Login / Signup
           </a>
         </nav>
       </header>
-
 
       {/* HERO SECTION */}
       <section
