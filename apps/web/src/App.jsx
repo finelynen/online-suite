@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Auth from "./pages/Auth.jsx";
 
 export default function App() {
   const disciplines = [
@@ -15,74 +17,89 @@ export default function App() {
   };
 
   return (
-    <div className="fine-lynen-portfolio" style={{ background: '#050505', color: '#ffffff', minHeight: '100vh', fontFamily: 'sans-serif', margin: 0 }}>
-      
-      {/* 1. Header Navigation Layout */}
-      <header role="banner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 2rem', background: '#000000', borderBottom: '1px solid #111111' }}>
-        <div style={{ fontSize: '1.3rem', fontWeight: '900', letterSpacing: '1px' }}>
-          FINE LYNEN
-        </div>
-        <nav>
-          <a href="#contact" onClick={contactSection} style={{ background: '#c5a880', color: '#000000', padding: '10px 20px', borderRadius: '4px', fontWeight: '600', textDecoration: 'none', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            Inquire / Booking
-          </a>
-        </nav>
-      </header>
+    <BrowserRouter>
+      <Routes>
 
-      {/* 2. Professional Profile Hero Section */}
-      <section style={{ padding: '120px 20px', textAlign: 'center', maxWidth: '850px', margin: '0 auto' }}>
-        <span style={{ fontSize: '11px', color: '#c5a880', letterSpacing: '4px', textTransform: 'uppercase', fontWeight: '600', display: 'block', marginBottom: '15px' }}>
-          Artist • Producer • Engineer • Model • Actor
-        </span>
-        <h1 style={{ fontSize: '4.5rem', fontWeight: '900', margin: '0 0 25px 0', letterSpacing: '-2px', textTransform: 'uppercase' }}>
-          Fine Lynen
-        </h1>
-        <p style={{ color: '#888888', fontSize: '1.3rem', fontWeight: '300', marginBottom: '40px', lineHeight: '1.7', letterSpacing: '0.5px' }}>
-          Creative force across music, fashion, and film. Offering premier creative collaboration, audio production assets, editorial modeling talent, and screen performance execution.
-        </p>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <a href="#contact" onClick={contactSection} style={{ border: '1px solid #c5a880', color: '#c5a880', padding: '14px 35px', textDecoration: 'none', fontWeight: '500', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '1px', borderRadius: '4px' }}>
-            View representation details
-          </a>
-        </div>
-      </section>
+        {/* HOME PAGE */}
+        <Route
+          path="/"
+          element={
+            <div className="fine-lynen-portfolio" style={{ background: '#050505', color: '#ffffff', minHeight: '100vh', fontFamily: 'sans-serif', margin: 0 }}>
+              
+              {/* 1. Header Navigation Layout */}
+              <header role="banner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 2rem', background: '#000000', borderBottom: '1px solid #111111' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: '900', letterSpacing: '1px' }}>
+                  FINE LYNEN
+                </div>
+                <nav>
+                  <a href="#contact" onClick={contactSection} style={{ background: '#c5a880', color: '#000000', padding: '10px 20px', borderRadius: '4px', fontWeight: '600', textDecoration: 'none', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    Inquire / Booking
+                  </a>
+                </nav>
+              </header>
 
-      {/* 3. Core Ecosystem Columns */}
-      <section style={{ background: '#000000', padding: '80px 20px', borderTop: '1px solid #111111', borderBottom: '1px solid #111111' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '0.85rem', color: '#555555', textTransform: 'uppercase', letterSpacing: '3px', marginBottom: '40px', textAlign: 'center' }}>Professional Ecosystem</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
-            {disciplines.map((item, idx) => (
-              <div key={idx} style={{ border: '1px solid #111111', padding: '30px', background: '#050505', borderRadius: '6px' }}>
-                <h3 style={{ color: '#c5a880', margin: '0 0 12px 0', fontSize: '1.25rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  {item.title}
-                </h3>
-                <p style={{ color: '#777777', fontSize: '0.95rem', margin: 0, lineHeight: '1.6' }}>
-                  {item.desc}
+              {/* 2. Professional Profile Hero Section */}
+              <section style={{ padding: '120px 20px', textAlign: 'center', maxWidth: '850px', margin: '0 auto' }}>
+                <span style={{ fontSize: '11px', color: '#c5a880', letterSpacing: '4px', textTransform: 'uppercase', fontWeight: '600', display: 'block', marginBottom: '15px' }}>
+                  Artist • Producer • Engineer • Model • Actor
+                </span>
+                <h1 style={{ fontSize: '4.5rem', fontWeight: '900', margin: '0 0 25px 0', letterSpacing: '-2px', textTransform: 'uppercase' }}>
+                  Fine Lynen
+                </h1>
+                <p style={{ color: '#888888', fontSize: '1.3rem', fontWeight: '300', marginBottom: '40px', lineHeight: '1.7', letterSpacing: '0.5px' }}>
+                  Creative force across music, fashion, and film. Offering premier creative collaboration, audio production assets, editorial modeling talent, and screen performance execution.
                 </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <a href="#contact" onClick={contactSection} style={{ border: '1px solid #c5a880', color: '#c5a880', padding: '14px 35px', textDecoration: 'none', fontWeight: '500', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '1px', borderRadius: '4px' }}>
+                    View representation details
+                  </a>
+                </div>
+              </section>
 
-      {/* 4. Action Contact / Profile Footer */}
-      <footer id="contact" style={{ background: '#050505', padding: '80px 20px', textAlign: 'center' }}>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <h4 style={{ color: '#c5a880', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.9rem' }}>
-            Direct Business Booking
-          </h4>
-          <p style={{ margin: '0 0 40px 0' }}>
-            <a href="mailto:finelynen@gmail.com" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '1.4rem', fontWeight: '500', borderBottom: '1px solid #333333', paddingBottom: '4px' }}>
-              finelynen@gmail.com
-            </a>
-          </p>
-          <div style={{ borderTop: '1px solid #111111', paddingTop: '30px', fontSize: '0.8rem', color: '#444444', letterSpacing: '1px' }}>
-            &copy; {new Date().getFullYear()} FINE LYNEN. All rights reserved.
-          </div>
-        </div>
-      </footer>
+              {/* 3. Core Ecosystem Columns */}
+              <section style={{ background: '#000000', padding: '80px 20px', borderTop: '1px solid #111111', borderBottom: '1px solid #111111' }}>
+                <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+                  <h2 style={{ fontSize: '0.85rem', color: '#555555', textTransform: 'uppercase', letterSpacing: '3px', marginBottom: '40px', textAlign: 'center' }}>Professional Ecosystem</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+                    {disciplines.map((item, idx) => (
+                      <div key={idx} style={{ border: '1px solid #111111', padding: '30px', background: '#050505', borderRadius: '6px' }}>
+                        <h3 style={{ color: '#c5a880', margin: '0 0 12px 0', fontSize: '1.25rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                          {item.title}
+                        </h3>
+                        <p style={{ color: '#777777', fontSize: '0.95rem', margin: 0, lineHeight: '1.6' }}>
+                          {item.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
 
-    </div>
+              {/* 4. Action Contact / Profile Footer */}
+              <footer id="contact" style={{ background: '#050505', padding: '80px 20px', textAlign: 'center' }}>
+                <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+                  <h4 style={{ color: '#c5a880', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.9rem' }}>
+                    Direct Business Booking
+                  </h4>
+                  <p style={{ margin: '0 0 40px 0' }}>
+                    <a href="mailto:finelynen@gmail.com" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '1.4rem', fontWeight: '500', borderBottom: '1px solid #333333', paddingBottom: '4px' }}>
+                      finelynen@gmail.com
+                    </a>
+                  </p>
+                  <div style={{ borderTop: '1px solid #111111', paddingTop: '30px', fontSize: '0.8rem', color: '#444444', letterSpacing: '1px' }}>
+                    &copy; {new Date().getFullYear()} FINE LYNEN. All rights reserved.
+                  </div>
+                </div>
+              </footer>
+
+            </div>
+          }
+        />
+
+        {/* AUTH PAGE */}
+        <Route path="/auth" element={<Auth />} />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
