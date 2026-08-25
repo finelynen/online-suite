@@ -64,4 +64,3 @@ export default function Portfolio() {
     </div>
   );
 }
-export default Portfolio;
