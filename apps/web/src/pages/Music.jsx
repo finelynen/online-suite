@@ -52,5 +52,3 @@ export default function Music() {
     </div>
   );
 }
-
-export default Music;
